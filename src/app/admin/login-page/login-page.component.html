@@ -8,7 +8,7 @@
     [ngClass]="{invalid: form.get('email').touched && form.get('email').invalid}"
     class="form-control">
     <label for="email">E-mail</label>
-    <input id="email" type="email"/>
+    <input id="email" type="email" formControlName="email"/>
     <div
       *ngIf="form.get('email').touched && form.get('email').invalid"
       class="validation">
@@ -16,7 +16,7 @@
         Enter e-mail
       </small>
       <small *ngIf="form.get('email').errors.email">
-        Enter e-amil correct
+        Enter e-mail correct
       </small>
     </div>
   </div>
@@ -25,11 +25,18 @@
     [ngClass]="{invalid: form.get('password').touched && form.get('password').invalid}"
     class="form-control">
     <label for="password">Password</label>
-    <input id="password" type="password"/>
+    <input id="password" type="password" formControlName="password"/>
     <div
       *ngIf="form.get('password').touched && form.get('password').invalid"
       class="validation">
-      <small>error</small>
+      <small *ngIf="form.get('password').errors.required">
+        Enter password
+      </small>
+      <small *ngIf="form.get('password').errors.minlength">
+        Password must be more then
+        {{form.get('password').errors.minlength.requiredLength}}
+        Now it is {{form.get('password').errors.minlength.actualLength}}
+      </small>
     </div>
   </div>
 
